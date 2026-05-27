@@ -139,4 +139,51 @@ document.addEventListener('DOMContentLoaded', () => {
       heroName.style.textShadow = 'none';
     });
   }
+  
+  // ===== Lightbox para Galeria =====
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.querySelector('.lightbox-close');
+  const galeriaItems = document.querySelectorAll('.galeria-item');
+
+  if (lightbox && lightboxImg) {
+    galeriaItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const overlaySpan = item.querySelector('.galeria-overlay span');
+        
+        lightboxImg.src = img.src;
+        if (overlaySpan) {
+          lightboxCaption.textContent = overlaySpan.textContent;
+        } else {
+          lightboxCaption.textContent = img.alt;
+        }
+        
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Evita scroll ao fundo
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Restaura o scroll
+    };
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) {
+        closeLightbox();
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
 });

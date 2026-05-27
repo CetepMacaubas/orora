@@ -807,6 +807,73 @@ footer {
   color: var(--texto-claro);
 }
 
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+.lightbox-content {
+  display: block;
+  max-width: 90%;
+  max-height: 75vh;
+  object-fit: contain;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.lightbox.active .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-caption {
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: var(--areia);
+  margin-top: 15px;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: var(--off-white);
+  font-size: 40px;
+  font-weight: 300;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+  color: var(--dourado);
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 968px) {
   .hero-inner {
